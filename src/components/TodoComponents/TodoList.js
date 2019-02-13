@@ -3,10 +3,12 @@
 import React from 'react';
 import './Todo.css';
 
-export default function TodoList() {
+function TodoList(props) {
     return (
-        props.friends.map((friend, idx) => (
-            <div key={idx}>{todoName}</div>
+        props.todoItems.map((todoItem, idx) => (
+            <div key={idx}>{todoItem.name}</div>
         ))
     );
 }
+
+export default TodoList;
