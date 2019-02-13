@@ -3,12 +3,10 @@
 import React from 'react';
 import './Todo.css';
 
-function TodoList(props) {
-    return (
-        props.todoItems.map((todoItem, idx) => (
-            <div key={idx}>{todoItem.name}</div>
-        ))
-    );
+export default function TodoList(props) {
+        return (
+            props.todoItems.map((todoItem, idx) => (
+                <div key={idx} onClick={() => props.isCompleted(todoItem.id)}>{todoItem.name}</div>
+            ))
+        );
 }
-
-export default TodoList;
