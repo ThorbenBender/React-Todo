@@ -18,12 +18,13 @@ export class TodoForm extends React.Component {
         this.props.addItem(this.state.inputValue);
         this.clearInput();
     }
+    onRemove 
     render() {
         return (
-            <div>
-                <input type="text" value={this.state.inputValue} onChange={this.changeHandler}></input>
+            <div className="todo-form">
+                <input type="text" value={this.state.inputValue} onChange={this.changeHandler} placeholder="What do you want to do"></input>
                 <button onClick={this.addButton}>Add Item</button>
-                {/* <button onClick={}>Remove Item</button> */}
+                <button onClick={this.props.removeItem}>Remove Item</button>
             </div>
         );
     }

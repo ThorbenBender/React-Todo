@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import TodoHeader from './components/TodoComponents/Todo';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,14 +23,34 @@ class App extends React.Component {
     };
 }
   addItem = itemName => {
-    this.setState(st => ({ todoItems: st.todoItems.concat({name: itemName }) }));
+    this.setState(st => ({ todoItems: st.todoItems.concat({name: itemName, completed: false, id: Date.now() }) }));
   }
   
-  isCompleted = id => {
-    console.log(id);
-    // this.todoItems.map(item => {
-    //   if (item === )
-    // })
+  isCompleted = (id, event) => {
+    let NewTodoItems = this.state.todoItems.map(item => {
+      if (item.id === id){
+        item.completed = !item.completed;
+        event.target.classList.toggle('completed');
+      }
+      return item;
+    })
+    this.setState({
+      todoItems: [...NewTodoItems],
+    })
+    
+  }
+  removeItem = () => {
+    let NewArrayItems = this.state.todoItems.filter(item => {
+      if (!item.completed){
+        return item;
+      }
+    })
+    this.setState({
+      todoItems: [...NewArrayItems],
+    })
+  }
+  addClass = event => {
+    event.target.classList.toggle('completed');
   }
   // addClass = i => {
   //   this.setState(st => ({ todoItems : st.todoItems[i]} ))
@@ -45,7 +66,10 @@ class App extends React.Component {
     const { todoItems } = this.state;
     return (
         <div className='todo'>
+        <TodoHeader />
+        <div className="todo-list">
             <TodoList todoItems={todoItems} isCompleted={this.isCompleted}/>
+          </div>
             <TodoForm addItem={this.addItem} removeItem={this.removeItem}/>
         </div>
     )

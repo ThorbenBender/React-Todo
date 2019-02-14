@@ -6,7 +6,7 @@ import './Todo.css';
 export default function TodoList(props) {
         return (
             props.todoItems.map((todoItem, idx) => (
-                <div key={idx} onClick={() => props.isCompleted(todoItem.id)}>{todoItem.name}</div>
+                <div className="listItem" key={idx} onClick={(event) => props.isCompleted(todoItem.id, event)}>{todoItem.name}</div>
             ))
         );
 }
